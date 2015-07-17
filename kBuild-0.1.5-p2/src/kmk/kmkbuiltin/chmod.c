@@ -70,6 +70,12 @@ extern void bsd_strmode(mode_t mode, char *p);
 #if defined(__APPLE__) && !defined(_DARWIN_FEATURE_UNIX_CONFORMANCE)
 extern int lchmod(const char *, mode_t);
 #endif
+#if defined(__OpenBSD__)
+int lchmod(const char *path, mode_t mode)
+{
+	chmod(path, mode);
+}
+#endif
 
 static int usage(FILE *);
 
