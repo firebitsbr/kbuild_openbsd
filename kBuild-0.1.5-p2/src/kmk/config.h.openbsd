@@ -39,7 +39,7 @@
 #define HAVE_ATEXIT 1
 
 /* Define to 1 if you have the `bsd_signal' function. */
-/* #undef HAVE_BSD_SIGNAL */
+#define HAVE_BSD_SIGNAL 1
 
 /* Use case insensitive file names */
 /* #undef HAVE_CASE_INSENSITIVE_FS */
