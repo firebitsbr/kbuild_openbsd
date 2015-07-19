@@ -46,6 +46,9 @@ char *vmsify (char *name, int type);
 # include <sys/mount.h>
 #endif
 /* bird: end */
+#ifdef __OpenBSD__
+typedef void *__ptr_t;
+#endif
 
 #ifdef CONFIG_WITH_STRCACHE2
 # include <stddef.h>
