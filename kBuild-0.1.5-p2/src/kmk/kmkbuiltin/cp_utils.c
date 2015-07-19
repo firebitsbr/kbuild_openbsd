@@ -79,6 +79,13 @@ __FBSDID("$FreeBSD: src/bin/cp/utils.c,v 1.43 2004/04/06 20:06:44 markm Exp $");
 # define S_ISVTX 0
 #endif
 
+#if defined(__OpenBSD__)
+int
+lutimes(const char *path, const struct timeval *times)
+{
+	return utimes(path, times);
+}
+#endif
 
 int
 copy_file(const FTSENT *entp, int dne, int changed_only, int *pcopied)
