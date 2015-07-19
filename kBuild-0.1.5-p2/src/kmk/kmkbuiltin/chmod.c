@@ -73,7 +73,7 @@ extern int lchmod(const char *, mode_t);
 #if defined(__OpenBSD__)
 int lchmod(const char *path, mode_t mode)
 {
-	chmod(path, mode);
+	return chmod(path, mode);
 }
 #endif
 
