@@ -136,7 +136,7 @@
 /* #undef HAVE_NDIR_H */
 
 /* Define to 1 if you have the <nlist.h> header file. */
-/* #undef HAVE_NLIST_H */
+#define HAVE_NLIST_H 1
 
 /* Define to 1 if you have the `pipe' function. */
 #define HAVE_PIPE 1
