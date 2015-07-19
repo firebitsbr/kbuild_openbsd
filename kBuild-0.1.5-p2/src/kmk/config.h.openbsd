@@ -91,7 +91,7 @@
 #define HAVE_GETHOSTBYNAME 1
 
 /* Define to 1 if you have the `gethostname' function. */
-/* #undef HAVE_GETHOSTNAME */
+#define HAVE_GETHOSTNAME 1
 
 /* Define to 1 if you have the `getloadavg' function. */
 #define HAVE_GETLOADAVG 1
