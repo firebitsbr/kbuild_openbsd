@@ -57,6 +57,7 @@ TEMPLATE_BIN-KMK_INCS = $(PATH_kmk) . $(TEMPLATE_BIN_INCS)
 TEMPLATE_BIN-KMK_INCS.darwin = glob
 TEMPLATE_BIN-KMK_INCS.dragonfly = glob
 TEMPLATE_BIN-KMK_INCS.freebsd = glob
+TEMPLATE_BIN-KMK_INCS.openbsd = glob
 TEMPLATE_BIN-KMK_INCS.solaris = glob
 TEMPLATE_BIN-KMK_LIBS = $(TEMPLATE_BIN_LIBS) $(TARGET_kmkmissing) $(LIB_KUTIL)
 ifdef ELECTRIC_HEAP # for electric heap (see electric.c) - windows only.
@@ -102,6 +103,10 @@ kmkmissing_SOURCES.freebsd = \
 
 kmkmissing_SOURCES.linux += \
 	kmkbuiltin/strlcpy.c
+
+kmkmissing_SOURCES.openbsd = \
+	glob/glob.c \
+	glob/fnmatch.c
 
 kmkmissing_SOURCES.solaris = \
 	kmkbuiltin/strlcpy.c \
@@ -221,6 +226,8 @@ kmk_SOURCES = \
 kmk_LIBS.freebsd.amd64 = pthread
 kmk_DEFS.freebsd.x86 = CONFIG_WITHOUT_THREADS
 
+kmk_LIBS.openbsd.amd64 = pthread
+
 #
 # kmkbuiltin commands
 #
@@ -264,7 +271,6 @@ PROGRAMS += \
 	kmk_append \
 	kmk_cat \
 	kmk_chmod \
-	kmk_cp \
 	kmk_cmp \
 	kmk_echo \
 	kmk_expr \

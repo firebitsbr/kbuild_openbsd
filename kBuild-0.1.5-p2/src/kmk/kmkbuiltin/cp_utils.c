@@ -80,6 +80,10 @@ __FBSDID("$FreeBSD: src/bin/cp/utils.c,v 1.43 2004/04/06 20:06:44 markm Exp $");
 #endif
 
 #if defined(__OpenBSD__)
+# if !defined(lchmod)
+#  define lchmod chmod
+# endif
+
 int
 lutimes(const char *path, const struct timeval *times)
 {
