@@ -1,6 +1,0 @@
-
-QuickReference-kmk.html: QuickReference-kmk.txt
-	LC_ALL=C rst2html.py --no-generator $< $@
-
-QuickReference-kmk.o: QuickReference-kmk.html
-.PHONY: QuickReference-kmk.o
