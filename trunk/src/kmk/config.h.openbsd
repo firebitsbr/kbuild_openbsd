@@ -39,7 +39,7 @@
 #define HAVE_ATEXIT 1
 
 /* Define to 1 if you have the `bsd_signal' function. */
-#define HAVE_BSD_SIGNAL 1
+#define HAVE_DECL_BSD_SIGNAL 1
 
 /* Use case insensitive file names */
 /* #undef HAVE_CASE_INSENSITIVE_FS */
@@ -197,6 +197,9 @@
 
 /* Define to 1 if you have the `strcasecmp' function. */
 #define HAVE_STRCASECMP 1
+
+/* Define to 1 if you have the `strncasecmp' function. */
+#define HAVE_STRNCASECMP 1
 
 /* Define to 1 if you have the `strcmpi' function. */
 /* #undef HAVE_STRCMPI */
