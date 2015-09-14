@@ -1,0 +1,86 @@
+https://www.virtualbox.org/wiki/FreeBSD%20build%20instructions
+
+FreeBSD build instructions
+
+The FreeBSD build instructions are being worked on as the FreeBSD port advances.
+
+If you like to help out with the FreeBSD port, please join the #vbox-dev irc channel or drop a mail on the development mailing list.
+
+Current state: It works quite stable by now for FreeBSD 7.x and 8-CURRENT. There is a port in the FreeBSD ports tree too.
+Prerequisites
+
+You need:
+
+    GCC 3.2.3 or later (except for the GCC 4.0.x series)
+    => The default GCC should be fine.
+    Yasm 0.6.2 or later
+    => /usr/ports/devel/yasm
+    as86 (real mode assembler, usually part of the dev86 or bin86 package)
+    => /usr/ports/devel/dev86
+    bcc (Bruce Evans C Compiler; often part of the dev86 package)
+    => /usr/ports/devel/dev86 (same as above)
+    IASL (Intel ACPI compiler)
+    => The one installed into /usr/sbin/iasl should be fine.
+    xsltproc (libxslt, XML style sheet processor)
+    => /usr/ports/textproc/libxslt
+    libxml2
+    => /usr/ports/textproc/libxml2
+    libXcursor (required to support color mouse pointers in guest)
+    => Probably installed, if not try /usr/ports/x11/libXcursor.
+    libpng
+    => /usr/ports/graphics/png
+    libIDL
+    => /usr/ports/devel/libIDL
+    libSDL
+    => /usr/ports/devel/sdl12
+    mkisofs (required only for additions which aren't supported yet)
+    => /usr/ports/sysutils/cdrtools
+    kBuild (The one provided with the VirtualBox sources doesn't with FreeBSD 8-CURRENT)
+    => /usr/ports/devel/kBuild
+    curl
+    => /usr/ports/ftp/curl
+    libXmu
+    => /usr/ports/x11-toolkits/libXmu
+    Qt 4.4.x
+    => /usr/ports/x11-toolkits/qt4-gui, /usr/ports/net/qt4-network, /usr/ports/devel/qt4-moc, /usr/ports/net/qt4-uic, /usr/ports/net/qt4-rcc and /usr/ports/net/qt4-linguist ; or configure --disable-qt 
+
+Building VirtualBox
+
+    Change to the root directory of the sources and execute the configure script:
+
+    ./configure --disable-hardening
+
+    If it finds everything it needs, it will create a file called 'AutoConfig.kmk' containing paths to the various tools on your system. Also, it will create an environment setup script called env.sh. This step only has to be done once (if something changes in your build tool setup, you might have to repeat it but keep in mind that both output files will be overwritten). 
+
+    The switch --disable-hardening should not be used for building packages for redistribution or for production use.
+
+    Whenever you want to build VirtualBox, you have to open a shell and source the generated environment setup script 'env.sh', i.e. do
+
+    source ./env.sh
+
+    To build a release package, type
+
+    kmk all
+
+    This produces the required binaries in out/freebsd.x86/release/bin/. If you want to build a debug version, type
+
+    kmk BUILD_TYPE=debug
+
+    In case you have more than one CPU core, kmk will automatically do a parallel build. 
+
+Running your build
+
+You can run VirtualBox directly from the build target directory (out/freebsd.x86/release/bin/).
+
+You have to load the kernel driver first using kldload ./vboxdrv.ko as root. Make sure you give yourself read and write access to /dev/vboxdrv.
+
+If you made a hardened build, make sure that the setuid stubs have the correct permissions:
+
+for f in VirtualBox VBoxHeadless VBoxSDL VBoxBFE VBoxNetDHCP VBoxNetAdpCtl; do
+  chown root.root $f
+  chmod 4511 $f
+done
+
+Finally, you can start one of the frontends, e.g.
+
+LD_LIBRARY_PATH=. ./VirtualBox
